@@ -1,0 +1,166 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>CIS 563 Assignment 1: Cloth</title></head>
+<body>
+<h1>Assignment 1: Jello simulation!</h1>
+<p>Due: February 14, 2011
+</p>
+<p>Starter code:&nbsp;<a href="ClothBaseline2008.zip">For
+MSVC 2008</a>
+</p>
+<h2>Overview</h2>
+The purpose of this assignment is to get to know 3D mass-spring
+particle systems,&nbsp;numeric integration, and collision detection
+and
+response. <br>
+<br><img style="width: 360px; height: 360px;" alt="undeformed" src="undeformed2.png"><img style="width: 360px; height: 360px;" alt="deformed" src="deformed2.png"><br>
+<br>
+<p>The code includes
+an incomplete jello animation system. Although much of the bookkeeping
+code has been written, the following parts are missing:
+</p>
+<ul>
+<li><span style="font-weight: bold;">(20 points)
+Forward Euler and midpoint integration</span>. RK4 integration
+is provided, but all three integration methods should be available and
+working. &nbsp; In particular, you will need to</li>
+<ul>
+<li>Implement JelloMesh::EulerIntegration()</li>
+<li>Implement&nbsp;JelloMesh::MidpointIntegration()</li>
+</ul>
+<li><span style="font-weight: bold;">(20 points)
+Particle forces other than gravity</span>. &nbsp;We've
+implemented gravity for you, but you should implement&nbsp;spring
+forces. &nbsp;You can also try implementing other forces if you
+like,
+such as those input by a user (see the extra credit for more
+information). &nbsp;Let us know what you try! In
+particular,&nbsp;you will need to</li>
+<ul>
+<li>Implement spring forces in&nbsp;JelloMesh::ComputeForces(ParticleGrid&amp; grid)</li>
+<li>Find good spring constants</li>
+</ul>
+<li><span style="font-weight: bold;">(15 points)
+Collision and penetration detection</span>. The
+particles should be tested for collisions and contacts with
+the&nbsp;ground and with the
+cylindrical objects in the scene. In particular,&nbsp;you will need to</li>
+<ul>
+<li>Look at the function&nbsp;JelloMesh::CheckForCollisions(ParticleGrid&amp; grid), which collects
+contacts and collisions into lists</li>
+<li>Implement&nbsp;JelloMesh::CylinderCollision()&nbsp;</li><li>Implement&nbsp;JelloMesh::FloorCollision()</li>
+</ul>
+<li><span style="font-weight: bold;">(20 points)
+Collision and penetration response</span>. The system
+intends for you to consider "collision" to be the case where a particle
+is very very close to, but not really inside, an object. In a
+collision, particles which are moving towards, rather than away from,
+the object should have a gentle impulse (change in momentum, manifested
+as a change in velocity) applied to them. The exact details of this are
+up to you: find something which produces good-looking results.
+"Penetration", on the other hand, is the situation where the particle
+is actually inside a cylinder. If there is penetration, you should
+apply a stiff spring force on the particle out from the surface of the
+object. &nbsp;In particular, you will need to</li>
+<ul>
+<li>Implement&nbsp;JelloMesh::ResolveContacts(ParticleGrid&amp;
+grid)</li>
+<li>Implement&nbsp;JelloMesh::ResolveCollisions(ParticleGrid&amp;
+grid)</li>
+</ul>
+<li><span style="font-weight: bold;">(15 points)
+Extra springs</span>. A simple network of structural
+springs connect the particles, but there are no shear or bending
+springs. The decisions
+you make on spring placement will have marked effects on the movement
+of the jello. You should be creative in your decisions, but in any case
+you should have springs to simulate shear and bending resistance.
+&nbsp;In particular, you will need to</li>
+<ul>
+<li>Modify JelloMesh::InitJelloMesh() to augment the structural
+springs with bend and shear springs.</li>
+</ul>
+</ul>
+<h2>Practicalities</h2>
+<p>The starter code has been designed to compile and run on a
+Windows
+system running Visual Studio 2008. &nbsp;The starter code
+depends on tinyxml and devIL, both of which come with
+the homework starter kit.
+</p>
+<p>All assignment code should be added to the JelloMesh class which
+contains function stubs marked with "TODO" to indicate where you should
+implement your assignment.
+</p>
+<h2>Getting started</h2>
+<p>Below we list the features included with the starter kit:
+</p>
+<ol>
+<li>Run the code. &nbsp;You should see a square mesh floating in space.</li><li>Left drag the mouse to orbit the camera around (0,0,0). &nbsp;Middle drag the mouse to zoom.&nbsp;Alt-middle mouse to pan.</li><li>From the right click menu, you can </li>
+<ol><li>Start, pause, or reset the simulation</li><li>Toggle the visualization of springs, forces, and velocities</li><li>Select the numerical integration type</li><li>Toggle
+recording. When enabled, the simulation will output&nbsp;images for
+each simulation step which you can use to make&nbsp;videos of your
+jiggly cubes.</li></ol>
+</ol>
+<h2>Questions for you to answer (10 points)</h2>
+<ol>
+<li>What is the effect of the Ks and Kd parameters on the jello?&nbsp;
+</li>
+<li>What are the benefits and the drawbacks of the collision
+system used here? What are some different ways in which it could be
+improved?
+</li>
+<li>Does the jello behave realistically?&nbsp;
+</li>
+</ol>
+<h2>Submission</h2>
+<p>Prepare a README.txt file with your responses to the above
+questions, as well as discussing the project and your solution to it,
+in the project directory. Discuss different things you tried with the
+jello, and design decisions you made. If you ran into problems and were
+unable to complete the assignment, describe what works, what doesn't,
+and how I should explore your project in order to get the best idea of
+what you've accomplished. If we gave you special dispensation to change
+or add files, mention that as well. Also list all resources, whether
+books, webpages, or fellow students, that you used when doing the
+assignment.
+</p>
+<p>Include, in an output directory, videos of your favorite jello
+animation.&nbsp;
+</p>
+<p>Before submission, you MUST clean the solution and
+additionally
+delete the NCB file in the project directory. If you do not do this,
+you WILL lose points. &nbsp;Submissions that do not compile will
+not be
+graded.
+</p>
+<p>Make sure that your submission can be downloaded to a Moore
+100
+computer, built, and executed without any problems or other setup
+required.
+</p>
+<p>Submit the completed assignment, zipped up, to the Courseweb
+site through the assignment submission link. If you encounter problems
+or aren't sure if your submission went through, additionally email the
+file to any&nbsp;of the TAs or graders.
+</p><h2>Extra Credit</h2>
+<p>If you feel like going beyond the scope of the assignment, you
+should consider the following extra credit assignments. Get the
+assignment working without them first.</p><ul><li>(5
+points) Support collisions with other shapes, such as an inclined
+plane, cubes, and spheres (Implement&nbsp;JelloMesh::CubeCollision()
+,&nbsp;Implement&nbsp;JelloMesh::SphereCollision()). &nbsp;Make a new,
+interesting scene.</li><li>(5 points) Let the user pick and drage particles on the cube surface</li><li>(5
+points) Support user generated forces. &nbsp;When the user drags the
+mouse, generate a corresponding forces to push the jello.</li><li>(5
+points) Support a procedurally generated force field</li><li>(20
+points) Support a different jello shape. &nbsp;For example, try
+tetrahedralizing a mesh using a 3rdparty API such as tetgen
+(http://tetgen.berlios.de/)</li></ul>
+<ul></ul>
+<p>You can get a maximum of 20 points in extra credit. Simply
+implementing these things doesn't guarantee you a 20; you really need
+to go above and beyond to get the full amount.
+</p>
+Start early! Have Fun!
+</body></html>
